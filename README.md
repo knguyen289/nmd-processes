@@ -79,4 +79,6 @@ Obtain NMD and Mutual Information analysis
 * **get_nmd.py:** Performs pairwise mutual information analysis
 	* Outputs: CSV Files for all pairwise Mutual Information (mutual_inf.csv) and Splice Site info (splicy.csv)
 
+* **submit_nmd.sbatch:** Runs **get_nmd.py**
+
 
