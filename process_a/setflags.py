@@ -47,7 +47,6 @@ def main():
 	real_ids = [int(item.split('.')[1].split('_')[-1]) for item in glob.glob('./' + rna + 'bedinfo' + dir_num + '/*')]
 	for num in real_ids:
 		ss_df.loc[num,'exists'] = 1
-	ss_df.to_excel(rna + '_pre_flag.xlsx')
 	flag_df = set_flags(ss_df)
 
 	flag_df.to_csv(oname,sep='\t')
