@@ -33,7 +33,7 @@ BED File retrieval and preliminary RNA lists
 				* MBNL1_bed_n.txt_made.txt for n in number of paths
 
 * **submit_part_fetch2.sbatch:** SBATCH that does **Process A** for the remaining 1224 RNA from **design_rnalist_submit2:**
-* **submit_test_fetch.sbatch:** SBATCH that does **Process A** for the test RNA from **design_rnalist_test:**
+* **submit_test_fetch.sbatch:** SBATCH that does **Process A** for the test RNA from **design_rnalist_test**
 
 ### Python Files:
 * **make_bed.py:** Uses go_to_bed from kn_tools to get the BED files for an RNA for all paths
