@@ -19,7 +19,7 @@ BED File retrieval and preliminary RNA lists
 ### SBATCH Files:
 * **submit_part_fetch1.sbatch:** SBATCH that does **Process A** for the first 2999 RNA from **design_rnalist_submit1:**
 	* Prerequisite: Have an empty directory named data_dir/
-	* _Outputs_: For each RNA, in data_dir, example for MBNL1:
+	* Outputs: For each RNA, in data_dir, example for MBNL1:
 		* MBNL1-1_all_data:
 			* id_MBNL1.txt - this has the directory ID for the bash to read, prevents overlap
 			* MBNL1-1_analysis:
@@ -81,5 +81,3 @@ Obtain NMD and Mutual Information analysis
 
 ### SBATCH Files:
 * **submit_nmd.sbatch:** Runs **get_nmd.py**
-
-
