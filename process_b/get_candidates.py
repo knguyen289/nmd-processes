@@ -18,7 +18,7 @@ for dir_name in data:
 		flag_file = dir_name + '/' + rna + '-' + dir_ID + '_analysis/flag_' + rna + '-' + dir_ID + '.csv'
 
 		flag_df = text_to_df(flag_file,index='ID')
-		
+	
 	except:
 		sys.stdout.write('\tEXCEPT ' + dir_name + '\n\n')
 		strange += rna + '\t' + dir_name + '\n'

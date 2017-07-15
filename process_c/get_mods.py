@@ -17,7 +17,6 @@ print rna_list
 for rna in rna_list:
 	print rna
 	try:
-		rna = 'C1orf141'
 		df = get_rna_dfs(rna,genome_df)
 		flag_file = '/ufrc/ewang/nguyenk/nmd_reg/data_dir_test/' + rna + '-' + dir_ID + '_all_data/' + rna + '-' + dir_ID + '_analysis/flag_' + rna + '-' + dir_ID + '.csv'
 		flag_df = text_to_df(flag_file,index='ID')

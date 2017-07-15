@@ -10,6 +10,7 @@
 #SBATCH --nodes=1
 #SBATCH --mem=5gb
 #SBATCH --array=1-1224%20
+#SBATCH --qos=ewang-b
 
 module load python
 
@@ -58,7 +59,6 @@ mkdir ${CSV_DIR}
 
 mv ss_${RNA}-${ID}.csv ${CSV_DIR}
 mv flag_${RNA}-${ID}.csv ${CSV_DIR}
-mv ${RNA}_pre_flag.xlsx ${CSV_DIR}
 
 FINAL_DIR="${PROJ}/${RNA}-${ID}_all_data/"
 mkdir ${FINAL_DIR}
