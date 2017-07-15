@@ -81,5 +81,3 @@ Obtain NMD and Mutual Information analysis
 
 ### SBATCH Files:
 * **submit_nmd.sbatch:** Runs **get_nmd.py**
-
-
