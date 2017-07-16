@@ -74,7 +74,7 @@ for csv in data:
 
 	# Get all pairs of exons and compute mutual information
 	mi_pairs = list(itertools.combinations(alt,2))
-	
+	.s
 	for pair in mi_pairs:         
 		l_a = alt_df[pair[0]]
 		if pair[0] in alt_ones:

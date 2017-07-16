@@ -9,8 +9,7 @@
 #SBATCH --cpus-per-task=16 ## threads
 #SBATCH --nodes=1
 #SBATCH --mem=5gb
-#SBATCH --array=1
--2999%20
+#SBATCH --array=1-2998%20
 #SBATCH --qos=ewang-b
 
 module load python
