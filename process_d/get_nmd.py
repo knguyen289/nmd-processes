@@ -96,7 +96,14 @@ for csv in data:
 		to_df.append(mi_toadd)
 		
 mi_df = pd.DataFrame(to_df,columns=['name2','pexon1','pexon2','start1','end1','start2','end2','mod1','mod2',(0,0),(1,1),(0,1),(1,0),'MI'])
+writer = pd.ExcelWriter('mutual_inf.xlsx')
+mi_df.to_excel(writer)
 mi_df.to_csv('mutual_inf.csv')
+writer.save()
 
 all_splice = pd.concat(splices)
+all_splice = all_splice.reset_index()
+writer2 = pd.ExcelWriter('splicy.xlsx')
+all_splice.to_excel(writer2)
 all_splice.to_csv('splicy.csv')
+writer.save()
