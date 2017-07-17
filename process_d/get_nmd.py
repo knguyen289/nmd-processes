@@ -7,7 +7,7 @@ import itertools
 
 from kn_tools.basic_tools import text_to_df
 from kn_tools.rna_path_tools import get_lookup2,get_rna_dfs
-from kn_tools.analysis_tools import mutual_inf
+from kn_tools.analysis_tools import mutual_inf,get_splice_sites
 
 data = glob.glob('/ufrc/ewang/nguyenk/nmd_reg/csv_dir/*')
 to_df = []
@@ -18,11 +18,11 @@ for csv in data:
 	dir_id = mod_csv.split('_nmd')[0].split('-')[-1]
 	
 	# Read file
-	mod_df = text_to_df(mod_csv,index='ID')
+	mod_df = text_to_df(csv,index='ID')
 	mod_df.insert(1,'name2',name2)
 
 	# Get lookup2 table to get psuedoexons
-	ggenome_df = text_to_df('human.txt')
+	genome_df = text_to_df('human.txt')
 	name2_df = get_rna_dfs(name2,genome_df)
 	strand = list(set(name2_df['strand']))[0]
 	mod_df.insert(2,'strand',strand)

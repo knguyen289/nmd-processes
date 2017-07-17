@@ -66,11 +66,11 @@ for rna in rna_list:
 			mod_list[i_node[ex_i]-1] = lu2.loc[i_node[ex_i],'mod']
 
 		nmd_ind = int(flag_df.loc[str(inds[i]),'basesFromJunct'])
-		#all_mod.append([inds[i]] + se_out[i] + mod_list + [nmd_ind])
-		all_mod.append([inds[i]] + mod_list + [nmd_ind])
+		all_mod.append([inds[i]] + se_out[i] + mod_list + [nmd_ind])
+		#all_mod.append([inds[i]] + mod_list + [nmd_ind])
 
-	#mod_df = pd.DataFrame(all_mod,columns=['ID','cdsStart','cdsEnd']+ pexons +['NMD_ind'])
-	mod_df = pd.DataFrame(all_mod,columns=['ID']+ pexons +['NMD_ind'])
+	mod_df = pd.DataFrame(all_mod,columns=['ID','cdsStart','cdsEnd']+ pexons +['NMD_ind'])
+	#mod_df = pd.DataFrame(all_mod,columns=['ID']+ pexons +['NMD_ind'])
 	sys.stdout.write('Got mod_df for ' + rna + '\n')
 	mod_df.insert(1,'name',names)
 	mod_df.set_index('ID',inplace=True)
