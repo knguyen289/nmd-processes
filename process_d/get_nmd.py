@@ -41,7 +41,8 @@ for csv in data:
 	splices.append(get_splice_sites(mod_df))
 
 	# Cut out rows with NMD_ind > 50
-	nmd_short_df = mod_df[mod_df['NMD_ind'] < 50]
+	temp_df = mod_df[mod_df['NMD_ind'] < 50]
+	nmd_short_df = temp_df[temp_df['NMD_ind'] != -1]
 
 	# Cut out columns that are 0 mod 3 or do not exist in isoforms
 	redact_df = copy.deepcopy(nmd_short_df)
