@@ -47,7 +47,7 @@ for dir_name in data:
 			over = False
 			for i in nmd_inds:
 				try:
-					if int(i) < 50:
+					if int(i) < 50 and int(i) != -1:
 						under = True
 					else:
 						over = True
