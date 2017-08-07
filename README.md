@@ -84,3 +84,9 @@ Obtain NMD and Mutual Information analysis
 ### SBATCH Files:
 * **submit_nmd.sbatch:** Runs **get_nmd.py**
 	* Prerequisite: Have a filled csv_dir from Process C
+
+## Process E
+Analyze the output from Process D
+
+### Python Files:
+* **mi_fish_analysis.py:** Searches for high Mutual Information and low p-value of Fisher
