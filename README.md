@@ -16,6 +16,20 @@ BED File retrieval and preliminary RNA lists
 * **design_rnalist_submit2:** Design file with the remaining 1224 RNA from **design_rnalist.csv**
 * **design_rnalist_test:** Design file for testing, includes MBNL1 and a minus strand RNA
 
+### Python Files:
+* **make_bed.py:** Uses go_to_bed from kn_tools to get the BED files for an RNA for all paths
+	* Options: --rna, --data (data filename)
+	* Outputs: BED directories (such as MBNL1bed1/ and MBNL1bedinfo1/)
+* **fetchFromBed.py:** Fetches sequences from BED files
+	* Options: --fetch (requires BED file, directory of sequence files, and output file)
+	* Outputs: Fetched directory (such as MBNL1made_beds1/)
+* **startstop.py:** Gets information from sequences using RegEx, uses fetch_coords from kn_tools
+	* Options: --rna, --id (directory ID)
+	* Outputs: CSV File (such as ss_MBNL1-1.csv)
+* **setflags.py:** Calculates NMD Indexes using set_flags from kn_tools
+	* Options: --rna, --id, --dir (where the ss csv is located)
+	* Outputs: CSV File (such as flag_MBNL1-1.csv)
+
 ### SBATCH Files:
 * **submit_part_fetch1.sbatch:** SBATCH that does **Process A** for the first 2999 RNA from **design_rnalist_submit1:**
 	* Prerequisite: Have an empty directory named data_dir/, directory of sequence files for fetchFromBed named chroms, and kn_tools
@@ -34,20 +48,6 @@ BED File retrieval and preliminary RNA lists
 
 * **submit_part_fetch2.sbatch:** SBATCH that does **Process A** for the remaining 1224 RNA from **design_rnalist_submit2**
 * **submit_test_fetch.sbatch:** SBATCH that does **Process A** for the test RNA from **design_rnalist_test**
-
-### Python Files:
-* **make_bed.py:** Uses go_to_bed from kn_tools to get the BED files for an RNA for all paths
-	* Options: --rna, --data (data filename)
-	* Outputs: BED directories (such as MBNL1bed1/ and MBNL1bedinfo1/)
-* **fetchFromBed.py:** Fetches sequences from BED files
-	* Options: --fetch (requires BED file, directory of sequence files, and output file)
-	* Outputs: Fetched directory (such as MBNL1made_beds1/)
-* **startstop.py:** Gets information from sequences using RegEx, uses fetch_coords from kn_tools
-	* Options: --rna, --id (directory ID)
-	* Outputs: CSV File (such as ss_MBNL1-1.csv)
-* **setflags.py:** Calculates NMD Indexes using set_flags from kn_tools
-	* Options: --rna, --id, --dir (where the ss csv is located)
-	* Outputs: CSV File (such as flag_MBNL1-1.csv)
 
 ## Process B
 Narrowing down NMD candidates
