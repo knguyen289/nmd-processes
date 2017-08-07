@@ -4,6 +4,7 @@ import glob
 import copy
 import math
 import itertools
+import scipy.stats as stats
 
 from kn_tools.basic_tools import text_to_df
 from kn_tools.rna_path_tools import get_lookup2,get_rna_dfs
@@ -55,7 +56,7 @@ for csv in data:
 	alt_df = copy.deepcopy(redact_df)
 	alt_ones = []
 	alt_twos = []
-	rest_cols = list(alt_df.columns)[5:-1]
+	rest_cols = list(alt_df.columns)[5:-3]
 	for col in rest_cols:
 		uniq_mods = sorted(list(set(nmd_short_df[col])))
 		if not -1 in uniq_mods:
@@ -74,29 +75,48 @@ for csv in data:
 			alt_df[col] = temp_exists
 	alt = alt_ones + alt_twos
 
-	# Get all pairs of exons and compute mutual information
+	# Get all pairs of exons, further filter by nmd index and compute mutual information and fisher
+	inds_set = list(set(list(alt_df['NMD_ind'])))
 	mi_pairs = list(itertools.combinations(alt,2))
-	for pair in mi_pairs:         
-		l_a = alt_df[pair[0]]
-		if pair[0] in alt_ones:
-			mod_a = 1
-		else:
-			mod_a = 2
-		l_b = alt_df[pair[1]]
-		if pair[1] in alt_ones:
-			mod_b = 1
-		else:
-			mod_b = 2
-		pair_test = [(l_a[i],l_b[i]) for i in range(len(l_a))]
+	to_df = []
+	for pair in mi_pairs: 
+	    # Split up calculation by nmd index
+	    for nmd_ind in inds_set:
+	        ind_df = alt_df[alt_df['NMD_ind'] == nmd_ind]
+	    	
+	    	# Identify the mod of exon a
+	        l_a = ind_df[pair[0]]
+	        if pair[0] in alt_ones:
+	            mod_a = 1
+	        else:
+	            mod_a = 2
+
+	        # Identify the mod of exon b
+	        l_b = ind_df[pair[1]]
+	        if pair[1] in alt_ones:
+	            mod_b = 1
+	        else:
+	            mod_b = 2
+	        
+	        # Existency pairs
+	        pair_test = [(l_a[i],l_b[i]) for i in range(len(l_a))]
+
+	        # Adding info that doesn't involve calculations
+	        mi_toadd = [name2,pair[0],pair[1],lu2.loc[int(pair[0]),'start'],lu2.loc[int(pair[0]),'end']] + [lu2.loc[int(pair[1]),'start'],lu2.loc[int(pair[1]),'end']] + [mod_a,mod_b]
+
+	        # Calculations
+	        mi,det = mutual_inf(pair_test)
+	        truth_tab = [[det[(1,1)],det[(0,1)]],[det[(1,0)],det[(0,0)]]]
+	        oddsratio,fish_p = stats.fisher_exact(truth_tab)
+	        
+	        # Adding in calculations
+	        mi_toadd += [det[(0,0)],det[(1,1)],det[(0,1)],det[(1,0)],mi,fish_p,nmd_ind]
+
+	        to_df.append(mi_toadd)
+
+mi_df = pd.DataFrame(to_df,columns=['name2','pexon1','pexon2','start1','end1','start2','end2','mod1','mod2',
+                                    (0,0),(1,1),(0,1),(1,0),'MI','Fisher','NMD_Ind'])
 		
-		mi_toadd = [name2,pair[0],pair[1],lu2.loc[int(pair[0]),'start'],lu2.loc[int(pair[0]),'end']] + [lu2.loc[int(pair[1]),'start'],lu2.loc[int(pair[1]),'end']] + [mod_a,mod_b]
-		
-		mi,det = mutual_inf(pair_test)
-		
-		mi_toadd += [det[(0,0)],det[(1,1)],det[(0,1)],det[(1,0)],mi]
-		to_df.append(mi_toadd)
-		
-mi_df = pd.DataFrame(to_df,columns=['name2','pexon1','pexon2','start1','end1','start2','end2','mod1','mod2',(0,0),(1,1),(0,1),(1,0),'MI'])
 writer = pd.ExcelWriter('mutual_inf.xlsx')
 mi_df.to_excel(writer)
 mi_df.to_csv('mutual_inf.csv')
