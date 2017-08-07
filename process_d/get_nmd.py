@@ -18,7 +18,7 @@ for csv in data:
 	name2 = '-'.join(mod_csv.split('_nmd')[0].split('-')[:-1])
 	dir_id = mod_csv.split('_nmd')[0].split('-')[-1]
 	
-	# Read file
+	# Read file and convert to DataFrame
 	mod_df = text_to_df(csv,index='ID')
 	mod_df.insert(1,'name2',name2)
 
@@ -29,8 +29,7 @@ for csv in data:
 	mod_df.insert(2,'strand',strand)
 	lu2 = get_lookup2(name2_df)
 
-	# Convert exon names in header to integers
-	# Convert table values to integers
+	# Convert exon names in header to int, table values to int
 	exon_cols = list(mod_df.columns)[5:-1]
 	for col in exon_cols:
 	    mod_df.insert(len(mod_df.columns)-1,int(col),'')
@@ -41,7 +40,7 @@ for csv in data:
 	exon_cols = map(int,exon_cols)
 	splices.append(get_splice_sites(mod_df))
 
-	# Cut out rows with NMD_ind > 50
+	# Cut out rows with NMD_ind > 50 and NMD_ind == -1
 	temp_df = mod_df[mod_df['NMD_ind'] < 50]
 	nmd_short_df = temp_df[temp_df['NMD_ind'] != -1]
 
@@ -56,7 +55,7 @@ for csv in data:
 	alt_df = copy.deepcopy(redact_df)
 	alt_ones = []
 	alt_twos = []
-	rest_cols = list(alt_df.columns)[5:-3]
+	rest_cols = list(alt_df.columns)[5:-1]
 	for col in rest_cols:
 		uniq_mods = sorted(list(set(nmd_short_df[col])))
 		if not -1 in uniq_mods:
