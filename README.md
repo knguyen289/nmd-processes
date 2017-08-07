@@ -67,7 +67,7 @@ Creating exon mod DataFrames
 
 ### Python Files:
 * **get_mods.py:** Opens candidates.txt and creates the mod dataframe for each RNA
-	* Outputs: CSV File (such as MBNL1-1_nmd_ind.csv) and TXT File (such as err_out.txt)
+	* Outputs: CSV File into csv_dir (such as MBNL1-1_nmd_ind.csv) and TXT File (such as err_out.txt)
 
 ### SBATCH Files:
 * **submit_mods.sbatch:** Runs **get_mods.py**
