@@ -78,7 +78,6 @@ for csv in data:
 	# Get all pairs of exons, further filter by nmd index and compute mutual information and fisher
 	inds_set = list(set(list(alt_df['NMD_ind'])))
 	mi_pairs = list(itertools.combinations(alt,2))
-	to_df = []
 	for pair in mi_pairs: 
 	    # Split up calculation by nmd index
 	    for nmd_ind in inds_set:
