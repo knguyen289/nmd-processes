@@ -18,7 +18,7 @@ BED File retrieval and preliminary RNA lists
 
 ### SBATCH Files:
 * **submit_part_fetch1.sbatch:** SBATCH that does **Process A** for the first 2999 RNA from **design_rnalist_submit1:**
-	* Prerequisite: Have an empty directory named data_dir/
+	* Prerequisite: Have an empty directory named data_dir/, directory of sequence files for fetchFromBed named chroms, and kn_tools
 	* Outputs: For each RNA, in data_dir, example for MBNL1:
 		* MBNL1-1_all_data:
 			* id_MBNL1.txt - this has the directory ID for the bash to read, prevents overlap
@@ -61,6 +61,7 @@ Narrowing down NMD candidates
 
 ### SBATCH Files:
 * **submit_candidates.sbatch:** Runs **get_candidates.py**
+	* Prerequisite: Have kn_tools in directory and data_dir filled from Process A
 
 ## Process C
 Creating exon mod DataFrames
@@ -71,14 +72,15 @@ Creating exon mod DataFrames
 
 ### SBATCH Files:
 * **submit_mods.sbatch:** Runs **get_mods.py**
-	* Prerequisite: Have an empty directory named csv_dir/
+	* Prerequisite: Have candidates.txt from Process B and have an empty directory named csv_dir/
 
 ## Process D
 Obtain NMD and Mutual Information analysis
 
 ### Python Files:
 * **get_nmd.py:** Performs pairwise mutual information analysis
-	* Outputs: CSV Files for all pairwise Mutual Information (mutual_inf.csv) and Splice Site info (splicy.csv)
+	* Outputs: TSV Files and XLSX for all pairwise Mutual Information (mutual_inf.tsv) and Splice Site info (splicy.tsv)
 
 ### SBATCH Files:
 * **submit_nmd.sbatch:** Runs **get_nmd.py**
+	* Prerequisite: Have a filled csv_dir from Process C

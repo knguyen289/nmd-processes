@@ -117,12 +117,12 @@ mi_df = pd.DataFrame(to_df,columns=['name2','pexon1','pexon2','start1','end1','s
 		
 writer = pd.ExcelWriter('mutual_inf.xlsx')
 mi_df.to_excel(writer)
-mi_df.to_csv('mutual_inf.csv',sep='\t')
+mi_df.to_csv('mutual_inf.tsv',sep='\t')
 writer.save()
 
 all_splice = pd.concat(splices)
 all_splice = all_splice.reset_index()
 writer2 = pd.ExcelWriter('splicy.xlsx')
 all_splice.to_excel(writer2)
-all_splice.to_csv('splicy.csv',sep='\t')
+all_splice.to_csv('splicy.tsv',sep='\t')
 writer.save()
