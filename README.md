@@ -56,12 +56,12 @@ Narrowing down NMD candidates
 * **get_candidates.py:** Opens the flag csv created in **Process A**
 	* Checks:
 		1. If there is a UTR Intron
-		2. If there exists at least one NMD index above, and at least one NMD below 50 bases
+		2. If there exists at least one NMD index above, and at least one NMD below 50 bases, exclude -1
 	* Outputs: TXT Files candidates.txt and strange_rna.txt if flag file does not exist
 
 ### SBATCH Files:
 * **submit_candidates.sbatch:** Runs **get_candidates.py**
-	* Prerequisite: Have kn_tools in directory and data_dir filled from Process A
+	* Prerequisite: Have kn_tools in directory and data_dir filled from **Process A**
 
 ## Process C
 Creating exon mod DataFrames
@@ -72,7 +72,7 @@ Creating exon mod DataFrames
 
 ### SBATCH Files:
 * **submit_mods.sbatch:** Runs **get_mods.py**
-	* Prerequisite: Have candidates.txt from Process B and have an empty directory named csv_dir/
+	* Prerequisite: Have candidates.txt from **Process B** and have an empty directory named csv_dir/
 
 ## Process D
 Obtain NMD and Mutual Information analysis
@@ -83,10 +83,10 @@ Obtain NMD and Mutual Information analysis
 
 ### SBATCH Files:
 * **submit_nmd.sbatch:** Runs **get_nmd.py**
-	* Prerequisite: Have a filled csv_dir from Process C
+	* Prerequisite: Have a filled csv_dir from **Process C**
 
 ## Process E
-Analyze the output from Process D
+Analyze the output from **Process D**
 
 ### Python Files:
 * **mi_fish_analysis.py:** Searches for high Mutual Information and low p-value of Fisher
