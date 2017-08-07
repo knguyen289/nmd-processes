@@ -49,7 +49,7 @@ for dir_name in data:
 				try:
 					if int(i) < 50 and int(i) != -1:
 						under = True
-					else:
+					if int(i) >= 50:
 						over = True
 					if under and over:
 						nmd_diverse = True
