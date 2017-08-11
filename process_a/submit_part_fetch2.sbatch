@@ -12,7 +12,7 @@
 #SBATCH --array=1-1224%20
 #SBATCH --qos=ewang-b
 
-module load python
+module load python/2.7.8
 
 PROJ=/ufrc/ewang/nguyenk/nmd_reg
 
