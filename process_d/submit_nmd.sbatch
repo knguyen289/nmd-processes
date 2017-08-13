@@ -9,6 +9,6 @@
 #SBATCH --nodes=1
 #SBATCH --mem=10gb
 
-module load python
+module load python/2.7.8
 
 python get_nmd.py

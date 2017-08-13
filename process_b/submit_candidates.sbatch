@@ -10,6 +10,6 @@
 #SBATCH --mem=10gb
 #SBATCH --qos=ewang-b
 
-module load python
+module load python/2.7.8
 
 python get_candidates.py
