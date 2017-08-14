@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --mail-user=nguyenk@ufl.edu
-#SBATCH --job-name=sofetch
+#SBATCH --job-name=sofetch2
 #SBATCH --mail-type=FAIL
 #SBATCH --output=/ufrc/ewang/nguyenk/nmd_reg/outlog_fetch/nmd_reg_%j.out
 #SBATCH --error=/ufrc/ewang/nguyenk/nmd_reg/errorlog_fetch/nmd_reg_%j.out
@@ -9,7 +9,7 @@
 #SBATCH --cpus-per-task=16 ## threads
 #SBATCH --nodes=1
 #SBATCH --mem=5gb
-#SBATCH --array=1-1224%20
+#SBATCH --array=1-2999%20
 #SBATCH --qos=ewang-b
 
 module load python/2.7.8
@@ -71,4 +71,4 @@ mv ${RNA}-${ID}_analysis ${FINAL_DIR}
 
 mv ${FINAL_DIR} ${PROJ}/data_dir/
 
-echo "Bash script complete. All information outputted into ${FINAL_DIR}."
+echo "Bash script complete. All information outputted into ${PROJ}/data_dir/${FINAL_DIR}."
