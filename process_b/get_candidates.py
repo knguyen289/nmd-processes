@@ -30,14 +30,20 @@ for dir_name in data:
 
 		utr3_inds = list(set(flag_df['exonsFromEnd']))
 		sys.stdout.write('\t\t' + ' '.join(utr3_inds) + '\n')
+
+		utr3_inds = sorted(utr3_inds)
+		if utr3_inds[-1] > 0:
+			has_3utr = True
+		"""
 		for i in utr3_inds:
 			sys.stdout.write('\t\tUTR Test Loop\n')
 			if int(i) != 0:
 				has_3utr = True
 				sys.stdout.write('\t\tUTR Test Loop Before Break\n')
 				break
-
+		"""
 		sys.stdout.write('\t\tHas 3\' UTR? ' + str(has_3utr) + '\n')
+		
 		nmd_diverse = False
 
 		if has_3utr:
