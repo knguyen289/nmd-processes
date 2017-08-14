@@ -74,7 +74,7 @@ for rna in rna_list:
 	sys.stdout.write('Got mod_df for ' + rna + '\n')
 	mod_df.insert(1,'name',names)
 	mod_df.set_index('ID',inplace=True)
-	mod_df.to_csv('/ufrc/ewang/nguyenk/nmd_reg/csv_dir/' + rna + '-' + dir_ID + '_nmd_ind.csv',sep='\t')
+	mod_df.to_csv('/ufrc/ewang/nguyenk/nmd_reg/csv_dir/' + rna + '-' + dir_ID + '_nmd_ind.tsv',sep='\t')
 	print 'Output mod_df for ' + rna + '\n'
 	#except:
 		#err_str += rna + '\n'
