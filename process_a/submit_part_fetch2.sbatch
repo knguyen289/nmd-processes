@@ -8,7 +8,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16 ## threads
 #SBATCH --nodes=1
-#SBATCH --mem=5gb
+#SBATCH --mem=10gb
 #SBATCH --array=1-2999%20
 
 module load python/2.7.8
