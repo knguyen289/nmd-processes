@@ -10,7 +10,6 @@
 #SBATCH --nodes=1
 #SBATCH --mem=5gb
 #SBATCH --array=1-2999%20
-#SBATCH --qos=ewang-b
 
 module load python/2.7.8
 
@@ -72,3 +71,7 @@ mv ${RNA}-${ID}_analysis ${FINAL_DIR}
 mv ${FINAL_DIR} ${PROJ}/data_dir/
 
 echo "Bash script complete. All information outputted into ${PROJ}/data_dir/${FINAL_DIR}."
+
+echo "Moving on to next SBATCH"
+
+sbatch submit_part_fetch3.sbatch
